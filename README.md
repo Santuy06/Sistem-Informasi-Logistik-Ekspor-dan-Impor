@@ -1,35 +1,50 @@
 # Sistem-Informasi-Logistik-Ekspor-dan-Impor
 
 
-Sistem Informasi Logistik Ekspor dan Impor adalah sebuah aplikasi yang dikembangkan menggunakan bahasa pemrograman Golang untuk membantu pengelolaan logistik pada aktivitas ekspor dan impor di Indonesia. Sistem ini dirancang dengan antarmuka berbasis CLI (Command Line Interface) dan menggunakan data input dari file Excel (.xlsx), yang memudahkan pengguna dalam memasukkan dan memproses data secara praktis. Aplikasi ini memiliki beberapa fitur utama, antara lain pencarian nama barang dan surat perizinan, penyortiran berdasarkan jenis transportasi dan jenis barang, serta fitur estimasi biaya yang mencakup perhitungan pajak, harga barang, biaya transportasi, dan jarak. Selain itu, aplikasi juga menyediakan menu interaktif, tampilan data logistik secara keseluruhan, dan opsi keluar (exit) dari program.
+📦 Sistem Informasi Logistik Ekspor dan Impor
+Sistem Informasi Logistik Ekspor dan Impor adalah sebuah aplikasi berbasis Command Line Interface (CLI) yang dikembangkan menggunakan bahasa pemrograman Golang. Aplikasi ini dirancang untuk membantu pengelolaan logistik pada aktivitas ekspor dan impor di Indonesia, dengan fitur-fitur analisis dan pencarian berbasis data dari file JSON.
 
-Penggunaan teknologi Golang memungkinkan sistem ini berjalan dengan performa tinggi dan efisien, terutama dalam mengelola data dalam jumlah besar. Aplikasi ini bertujuan untuk mendukung pengambilan keputusan yang lebih cepat dan akurat dalam proses logistik ekspor dan impor, serta memberikan gambaran menyeluruh mengenai alur barang dan biayanya. Diharapkan dengan adanya sistem ini, pelaku usaha dan pengelola logistik dapat meningkatkan efisiensi serta transparansi dalam rantai pasok internasional. Proyek ini juga menjadi bagian dari tugas besar (TuBes) yang menggambarkan implementasi nyata dari pengembangan sistem informasi berbasis data dan otomasi proses logistik.
+Sistem ini memungkinkan pengguna untuk mencari, memfilter, menyortir, dan menghitung estimasi biaya barang secara cepat dan efisien, mendukung pengambilan keputusan dalam rantai pasok logistik secara lebih tepat dan terstruktur.
 
-Repositori ini berisi kode sumber untuk aplikasi Sistem Informasi Logistik Ekspor dan Impor yang dibangun menggunakan bahasa pemrograman Golang dan terintegrasi dengan data Excel.
-
-🧩 Fitur Utama:
-🔍 Pencarian Barang berdasarkan nama
+🧩 Fitur Utama
+🔍 Pencarian Nama Barang
+Cari data barang berdasarkan nama.
 
 📄 Pencarian Surat Perizinan
+Telusuri barang berdasarkan jenis surat izin.
 
 🚚 Penyortiran Transportasi Barang
+Filter barang berdasarkan jenis transportasi seperti laut, udara, atau darat.
 
 📦 Penyortiran Jenis Barang
+Tampilkan barang sesuai kategori jenisnya (misal: elektronik, tekstil, dsb.).
 
-💰 Estimasi Biaya (pajak, harga, transportasi, dan jarak)
+💰 Estimasi Biaya Logistik
+Hitung estimasi biaya berdasarkan harga barang, pajak, dan jarak tempuh dengan formula:
 
-📊 Tampilan Data
+Total = Harga + (Harga × Pajak%) + (Jarak × Tarif/km)
+
+📊 Tampilan Seluruh Data Barang
+Lihat seluruh data logistik dalam satu tampilan.
+
+🔢 Penyortiran Data
+
+Heap Sort: berdasarkan persentase pajak.
+
+Radix Sort (simulasi): berdasarkan harga barang.
 
 📋 Menu Interaktif
+Navigasi berbasis angka memudahkan pengguna dalam memilih fitur.
 
-❌ Exit/keluar dari aplikasi
+❌ Exit Program
+Keluar dari aplikasi dengan aman.
 
-⚙️ Teknologi:
-Bahasa: Golang
+⚙️ Teknologi
+Bahasa Pemrograman: Go (Golang)
 
-Input data: Excel (.xlsx)
+Input Data: File JSON (data.json)
 
-Eksekusi: CLI (Command Line Interface)
+Eksekusi Program: Command Line Interface (CLI)
 
-📌 Tujuan:
-Aplikasi ini dikembangkan untuk membantu pengelolaan dan analisis logistik pada proses ekspor dan impor di Indonesia secara efisien dan terstruktur.
+📌 Tujuan
+Aplikasi ini ditujukan untuk membantu pengusaha, pengelola logistik, dan pihak terkait dalam melakukan pencatatan, analisis, dan estimasi biaya logistik ekspor-impor secara efisien. Sistem ini juga merupakan bagian dari Tugas Besar (TuBes) yang menggambarkan penerapan nyata pengembangan sistem informasi berbasis data dan proses logistik terotomasi.
