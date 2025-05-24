@@ -1,0 +1,47 @@
+[
+  {
+    "nama": "Laptop ABC",
+    "surat_izin": "SI001",
+    "transportasi": "Laut",
+    "jenis": "Elektronik",
+    "harga": 10000000,
+    "pajak_persen": 10.0,
+    "jarak_km": 1200
+  },
+  {
+    "nama": "Meja Kayu",
+    "surat_izin": "SI002",
+    "transportasi": "Darat",
+    "jenis": "Furnitur",
+    "harga": 2500000,
+    "pajak_persen": 5.0,
+    "jarak_km": 300
+  },
+  {
+    "nama": "Kopi Premium",
+    "surat_izin": "SI003",
+    "transportasi": "Udara",
+    "jenis": "Makanan",
+    "harga": 500000,
+    "pajak_persen": 2.5,
+    "jarak_km": 1000
+  },
+  {
+    "nama": "Smartphone XYZ",
+    "surat_izin": "SI004",
+    "transportasi": "Laut",
+    "jenis": "Elektronik",
+    "harga": 7000000,
+    "pajak_persen": 8.0,
+    "jarak_km": 1500
+  },
+  {
+    "nama": "Keramik Lantai",
+    "surat_izin": "SI005",
+    "transportasi": "Darat",
+    "jenis": "Bangunan",
+    "harga": 1500000,
+    "pajak_persen": 6.0,
+    "jarak_km": 600
+  }
+]
