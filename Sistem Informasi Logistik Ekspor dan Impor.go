@@ -253,8 +253,8 @@ func menu(daftar []Barang) {
 		case "6":
 			tampilkanSemua(daftar)
 		case "7":
-			fmt.Println("1. Heap Sort Pajak")
-			fmt.Println("2. Radix Sort Harga")
+			fmt.Println("1. Pajak")
+			fmt.Println("2. Harga")
 			fmt.Print("Pilih: ")
 			sortOpsi, _ := reader.ReadString('\n')
 			sortOpsi = strings.TrimSpace(sortOpsi)
