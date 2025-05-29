@@ -266,7 +266,7 @@ func menu(daftar []Barang) {
 				fmt.Println("Pilihan tidak valid.")
 			}
 		case "8":
-			fmt.Println("Keluar...")
+			fmt.Println("Sedang loading keluar desuwa...")
 			return
 		default:
 			fmt.Println("Menu tidak dikenali.")
