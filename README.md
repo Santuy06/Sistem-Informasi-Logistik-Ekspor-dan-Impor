@@ -1,8 +1,5 @@
 # Sistem-Informasi-Logistik-Ekspor-dan-Impor
 
-
-Berikut versi perbaikan dan penyempurnaan deskripsi GitHub Anda agar lebih profesional, rapi, dan menarik:
-
 ---
 
 # 📦 Sistem Informasi Logistik Ekspor dan Impor
@@ -79,6 +76,3 @@ Diharapkan dapat membantu:
 Dalam melakukan **pencatatan, analisis, dan estimasi biaya** logistik secara lebih efisien dan terotomatisasi.
 
 ---
-
-Bila Anda ingin saya bantu bikin README lengkap atau menyesuaikan dengan gaya Markdown GitHub secara penuh (misalnya dengan badge, link repo, atau contoh input/output), tinggal beri tahu!
-
