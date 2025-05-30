@@ -1,22 +1,15 @@
-// kode program
-
 package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
 	"strings"
 )
 
-// Struktur Data
 type SuratIzin struct {
-	ID     string
-	Jenis  string
-	Detail string
+	ID    int
+	Jenis string
 }
 
 type Transportasi struct {
@@ -30,251 +23,352 @@ type Barang struct {
 	Nama         string
 	Jenis        string
 	Harga        int
-	Pajak        float64
-	JarakKM      int
+	PajakImpor   float64
+	PajakEkspor  float64
+	BeratBarang  float64
 	SuratIzin    SuratIzin
 	Transportasi Transportasi
 }
 
-// Fungsi baca data dari JSON
-func muatData(namaFile string) []Barang {
-	file, err := os.Open(namaFile)
-	if err != nil {
-		log.Fatalf("Gagal membuka file JSON: %v", err)
-	}
-	defer file.Close()
-
-	byteValue, _ := ioutil.ReadAll(file)
-	var daftarBarang []Barang
-	err = json.Unmarshal(byteValue, &daftarBarang)
-	if err != nil {
-		log.Fatalf("Gagal parsing JSON: %v", err)
-	}
-	return daftarBarang
+var daftarBarang = [10]Barang{
+	{
+		Nama:        "Padi Organik",
+		Jenis:       "Pertanian",
+		Harga:       150000,
+		PajakImpor:  0,
+		PajakEkspor: 5,
+		BeratBarang: 50,
+		SuratIzin:   SuratIzin{ID: 1, Jenis: "Impor"},
+		Transportasi: Transportasi{
+			ID: "TR001", Jenis: "Truk", BiayaPerKM: 2000, WaktuPengiriman: 3,
+		},
+	},
+	{
+		Nama:        "Susu Sapi",
+		Jenis:       "Peternakan",
+		Harga:       100000,
+		PajakImpor:  10,
+		PajakEkspor: 0,
+		BeratBarang: 20,
+		SuratIzin:   SuratIzin{ID: 2, Jenis: "Ekspor"},
+		Transportasi: Transportasi{
+			ID: "TR002", Jenis: "Kereta", BiayaPerKM: 1500, WaktuPengiriman: 5,
+		},
+	},
+	{
+		Nama:        "Benih Jagung",
+		Jenis:       "Pertanian",
+		Harga:       50000,
+		PajakImpor:  0,
+		PajakEkspor: 0,
+		BeratBarang: 10,
+		SuratIzin:   SuratIzin{ID: 3, Jenis: "Lokal"},
+		Transportasi: Transportasi{
+			ID: "TR001", Jenis: "Truk", BiayaPerKM: 2000, WaktuPengiriman: 3,
+		},
+	},
+	{
+		Nama:        "Kopi Arabika",
+		Jenis:       "Perkebunan",
+		Harga:       250000,
+		PajakImpor:  5,
+		PajakEkspor: 8,
+		BeratBarang: 15,
+		SuratIzin:   SuratIzin{ID: 4, Jenis: "Ekspor"},
+		Transportasi: Transportasi{
+			ID: "TR003", Jenis: "Pesawat", BiayaPerKM: 5000, WaktuPengiriman: 1,
+		},
+	},
+	{
+		Nama:        "Coklat Fermentasi",
+		Jenis:       "Perkebunan",
+		Harga:       300000,
+		PajakImpor:  15,
+		PajakEkspor: 10,
+		BeratBarang: 25,
+		SuratIzin:   SuratIzin{ID: 5, Jenis: "Impor"},
+		Transportasi: Transportasi{
+			ID: "TR004", Jenis: "Kapal", BiayaPerKM: 1000, WaktuPengiriman: 7,
+		},
+	},
+	{
+		Nama:        "Daging Ayam",
+		Jenis:       "Peternakan",
+		Harga:       120000,
+		PajakImpor:  8,
+		PajakEkspor: 0,
+		BeratBarang: 30,
+		SuratIzin:   SuratIzin{ID: 6, Jenis: "Impor"},
+		Transportasi: Transportasi{
+			ID: "TR002", Jenis: "Kereta", BiayaPerKM: 1500, WaktuPengiriman: 5,
+		},
+	},
+	{
+		Nama:        "Ikan Laut Beku",
+		Jenis:       "Perikanan",
+		Harga:       200000,
+		PajakImpor:  12,
+		PajakEkspor: 5,
+		BeratBarang: 40,
+		SuratIzin:   SuratIzin{ID: 7, Jenis: "Ekspor"},
+		Transportasi: Transportasi{
+			ID: "TR003", Jenis: "Pesawat", BiayaPerKM: 5000, WaktuPengiriman: 1,
+		},
+	},
+	{
+		Nama:        "Kacang Tanah",
+		Jenis:       "Pertanian",
+		Harga:       80000,
+		PajakImpor:  0,
+		PajakEkspor: 4,
+		BeratBarang: 12,
+		SuratIzin:   SuratIzin{ID: 8, Jenis: "Lokal"},
+		Transportasi: Transportasi{
+			ID: "TR001", Jenis: "Truk", BiayaPerKM: 2000, WaktuPengiriman: 3,
+		},
+	},
+	{
+		Nama:        "Buah Naga",
+		Jenis:       "Perkebunan",
+		Harga:       180000,
+		PajakImpor:  0,
+		PajakEkspor: 6,
+		BeratBarang: 22,
+		SuratIzin:   SuratIzin{ID: 9, Jenis: "Ekspor"},
+		Transportasi: Transportasi{
+			ID: "TR004", Jenis: "Kapal", BiayaPerKM: 1000, WaktuPengiriman: 7,
+		},
+	},
+	{
+		Nama:        "Garam Laut",
+		Jenis:       "Perikanan",
+		Harga:       60000,
+		PajakImpor:  5,
+		PajakEkspor: 3,
+		BeratBarang: 18,
+		SuratIzin:   SuratIzin{ID: 10, Jenis: "Impor"},
+		Transportasi: Transportasi{
+			ID: "TR002", Jenis: "Kereta", BiayaPerKM: 1500, WaktuPengiriman: 5,
+		},
+	},
 }
 
-// Fitur pencarian nama barang
-func cariNamaBarang(daftar []Barang, kataKunci string) {
-	kataKunci = strings.ToLower(kataKunci)
-	ditemukan := false
-	fmt.Println("Hasil pencarian:")
-	for _, barang := range daftar {
-		if strings.Contains(strings.ToLower(barang.Nama), kataKunci) {
-			fmt.Println(barang)
-			ditemukan = true
+func cetakBarang(b Barang) {
+	fmt.Println("Nama Barang       :", b.Nama)
+	fmt.Println("Jenis             :", b.Jenis)
+	fmt.Println("Harga             : Rp", b.Harga)
+	fmt.Printf("Pajak Impor       : %.2f%%\n", b.PajakImpor)
+	fmt.Printf("Pajak Ekspor      : %.2f%%\n", b.PajakEkspor)
+	fmt.Println("Berat             :", b.BeratBarang, "kg")
+	fmt.Println("Surat Izin        :", b.SuratIzin.ID, "-", b.SuratIzin.Jenis)
+	fmt.Printf("Transportasi      : %s (Biaya per KM: Rp %d, Waktu: %d hari)\n", b.Transportasi.Jenis, b.Transportasi.BiayaPerKM, b.Transportasi.WaktuPengiriman)
+	fmt.Println("-----------------------------------")
+}
+
+func cariBarang(nama string) int {
+	nama = strings.ToLower(nama)
+	for i := range daftarBarang {
+		if strings.Contains(strings.ToLower(daftarBarang[i].Nama), nama) {
+			return i
 		}
 	}
-	if !ditemukan {
-		fmt.Println("Tidak ditemukan barang dengan kata kunci tersebut.")
-	}
+	return -1
 }
 
-// Fitur pencarian surat izin
-func cariSurat(daftar []Barang, surat string) {
-	ditemukan := false
-	fmt.Println("Hasil pencarian surat izin:")
-	for _, barang := range daftar {
-		if strings.EqualFold(barang.SuratIzin.ID, surat) || strings.EqualFold(barang.SuratIzin.Jenis, surat) {
-			fmt.Println(barang)
-			ditemukan = true
+func urutkanSuratIzinID() {
+	n := len(daftarBarang)
+	for i := 0; i < n-1; i++ {
+		for j := i + 1; j < n; j++ {
+			if daftarBarang[i].SuratIzin.ID > daftarBarang[j].SuratIzin.ID {
+				daftarBarang[i], daftarBarang[j] = daftarBarang[j], daftarBarang[i]
+			}
 		}
 	}
-	if !ditemukan {
-		fmt.Println("Tidak ditemukan surat izin tersebut.")
-	}
 }
 
-// Filter berdasarkan transportasi
-func filterTransportasi(daftar []Barang, jenis string) {
-	fmt.Println("Barang dengan transportasi:", jenis)
-	ada := false
-	for _, barang := range daftar {
-		if strings.EqualFold(barang.Transportasi.Jenis, jenis) {
-			fmt.Println(barang)
-			ada = true
+func cariSuratIzinDenganBinary(id int) int {
+	low, high := 0, len(daftarBarang)-1
+	for low <= high {
+		mid := (low + high) / 2
+		if daftarBarang[mid].SuratIzin.ID == id {
+			return mid
+		} else if daftarBarang[mid].SuratIzin.ID < id {
+			low = mid + 1
+		} else {
+			high = mid - 1
 		}
 	}
-	if !ada {
-		fmt.Println("Tidak ditemukan barang dengan jenis transportasi tersebut.")
+	return -1
+}
+
+func urutkanPajakImpor(asc bool) {
+	n := len(daftarBarang)
+	for i := 0; i < n-1; i++ {
+		index := i
+		for j := i + 1; j < n; j++ {
+			if (asc && daftarBarang[j].PajakImpor < daftarBarang[index].PajakImpor) ||
+				(!asc && daftarBarang[j].PajakImpor > daftarBarang[index].PajakImpor) {
+				index = j
+			}
+		}
+		daftarBarang[i], daftarBarang[index] = daftarBarang[index], daftarBarang[i]
 	}
 }
 
-// Filter berdasarkan jenis barang
-func filterJenisBarang(daftar []Barang, jenis string) {
-	fmt.Println("Barang dengan jenis:", jenis)
-	ada := false
-	for _, barang := range daftar {
-		if strings.EqualFold(barang.Jenis, jenis) {
-			fmt.Println(barang)
-			ada = true
+func urutkanHarga(asc bool) {
+	n := len(daftarBarang)
+	for i := 1; i < n; i++ {
+		key := daftarBarang[i]
+		j := i - 1
+		for j >= 0 {
+			lebih := daftarBarang[j].Harga > key.Harga
+			if !asc {
+				lebih = daftarBarang[j].Harga < key.Harga
+			}
+			if lebih {
+				daftarBarang[j+1] = daftarBarang[j]
+				j--
+			} else {
+				break
+			}
+		}
+		daftarBarang[j+1] = key
+	}
+}
+
+func urutkanNama() {
+	n := len(daftarBarang)
+	for i := 1; i < n; i++ {
+		key := daftarBarang[i]
+		j := i - 1
+		for j >= 0 && strings.ToLower(daftarBarang[j].Nama) > strings.ToLower(key.Nama) {
+			daftarBarang[j+1] = daftarBarang[j]
+			j--
+		}
+		daftarBarang[j+1] = key
+	}
+}
+
+func estimasiBiaya() {
+	nama := input("Masukkan nama barang: ")
+	index := cariBarang(nama)
+	if index == -1 {
+		fmt.Println("Barang tidak ditemukan.")
+		return
+	}
+	barang := daftarBarang[index]
+
+	fmt.Println("Pilih jenis surat izin:")
+	fmt.Println("1. Impor")
+	fmt.Println("2. Ekspor")
+	fmt.Print("Masukkan pilihan (1/2): ")
+
+	var pilihan int
+	fmt.Scanln(&pilihan)
+
+	// Tentukan jenis surat izin berdasarkan pilihan
+	switch pilihan {
+	case 1:
+		barang.SuratIzin.Jenis = "Impor"
+	case 2:
+		barang.SuratIzin.Jenis = "Ekspor"
+	default:
+		fmt.Println("Pilihan tidak valid.")
+		return
+	}
+
+	jarak := 100.0
+	biayaTransport := float64(barang.Transportasi.BiayaPerKM) * jarak
+	pajak := 0.0
+
+	switch barang.SuratIzin.Jenis {
+	case "Impor":
+		pajak = float64(barang.Harga) * barang.PajakImpor / 100
+	case "Ekspor":
+		pajak = float64(barang.Harga) * barang.PajakEkspor / 100
+	}
+
+	total := float64(barang.Harga) + pajak + biayaTransport
+
+	fmt.Println("=== Estimasi Biaya", barang.SuratIzin.Jenis, "===")
+	fmt.Printf("Harga Barang       : Rp %.0f\n", float64(barang.Harga))
+	fmt.Printf("Pajak %s        : Rp %.0f\n", barang.SuratIzin.Jenis, pajak)
+	fmt.Printf("Biaya Transportasi : Rp %.0f\n", biayaTransport)
+	fmt.Printf("Total Biaya        : Rp %.0f\n", total)
+}
+
+func tampilkanSemuaBarang() {
+	for _, barang := range daftarBarang {
+		if barang.Nama != "" {
+			cetakBarang(barang)
 		}
 	}
-	if !ada {
-		fmt.Println("Tidak ditemukan barang dengan jenis tersebut.")
-	}
 }
 
-// Estimasi biaya
-func estimasiBiaya(barang Barang) float64 {
-	biayaPajak := float64(barang.Harga) * barang.Pajak / 100
-	biayaTransport := float64(barang.JarakKM) * float64(barang.Transportasi.BiayaPerKM)
-	return float64(barang.Harga) + biayaPajak + biayaTransport
-}
-
-// Tampilkan semua data
-func tampilkanSemua(daftar []Barang) {
-	for _, barang := range daftar {
-		fmt.Println(barang)
-	}
-}
-
-// Manual Heap Sort berdasarkan Pajak
-func heapify(arr []Barang, n, i int) {
-	terbesar := i
-	kiri := 2*i + 1
-	kanan := 2*i + 2
-
-	if kiri < n && arr[kiri].Pajak > arr[terbesar].Pajak {
-		terbesar = kiri
-	}
-	if kanan < n && arr[kanan].Pajak > arr[terbesar].Pajak {
-		terbesar = kanan
-	}
-	if terbesar != i {
-		arr[i], arr[terbesar] = arr[terbesar], arr[i]
-		heapify(arr, n, terbesar)
-	}
-}
-
-func heapSortPajak(arr []Barang) {
-	n := len(arr)
-	for i := n/2 - 1; i >= 0; i-- {
-		heapify(arr, n, i)
-	}
-	for i := n - 1; i >= 0; i-- {
-		arr[0], arr[i] = arr[i], arr[0]
-		heapify(arr, i, 0)
-	}
-	fmt.Println("Data disortir berdasarkan Pajak:")
-	tampilkanSemua(arr)
-}
-
-func MaksHarga(arr []Barang) int {
-	maks := arr[0].Harga
-	for _, barang := range arr {
-		if barang.Harga > maks {
-			maks = barang.Harga
-		}
-	}
-	return maks
-}
-
-func HitungSortHarga(arr []Barang, exp int) {
-	n := len(arr)
-	output := make([]Barang, n)
-	hitung := make([]int, 10)
-
-	for i := 0; i < n; i++ {
-		idx := (arr[i].Harga / exp) % 10
-		hitung[idx]++
-	}
-	for i := 1; i < 10; i++ {
-		hitung[i] += hitung[i-1]
-	}
-	for i := n - 1; i >= 0; i-- {
-		idx := (arr[i].Harga / exp) % 10
-		output[hitung[idx]-1] = arr[i]
-		hitung[idx]--
-	}
-	for i := 0; i < n; i++ {
-		arr[i] = output[i]
-	}
-}
-
-// Manual Radix Sort berdasarkan Pajak
-func radixSortHarga(arr []Barang) {
-	maks := MaksHarga(arr)
-	for exp := 1; maks/exp > 0; exp *= 10 {
-		HitungSortHarga(arr, exp)
-	}
-	fmt.Println("Data disortir berdasarkan Harga:")
-	tampilkanSemua(arr)
-}
-
-// Menu utama
-func menu(daftar []Barang) {
+func input(teks string) string {
+	fmt.Print(teks)
 	reader := bufio.NewReader(os.Stdin)
-	for {
-		fmt.Println("\n=== Menu Sistem Logistik ===")
-		fmt.Println("1. Cari Nama Barang")
-		fmt.Println("2. Cari Surat Izin")
-		fmt.Println("3. Filter Transportasi")
-		fmt.Println("4. Filter Jenis Barang")
-		fmt.Println("5. Estimasi Biaya")
-		fmt.Println("6. Tampilkan Semua Data")
-		fmt.Println("7. Sorting Pajak atau Harga")
-		fmt.Println("8. Keluar")
-		fmt.Print("Pilih menu: ")
+	hasil, _ := reader.ReadString('\n')
+	return strings.TrimSpace(hasil)
+}
 
-		pilihan, _ := reader.ReadString('\n')
-		pilihan = strings.TrimSpace(pilihan)
+func menu() {
+	for {
+		fmt.Println("\n=== Sistem Logistik ===")
+		fmt.Println("1. Cari Barang (Sequential Search)")
+		fmt.Println("2. Cari Surat Izin (Binary Search)")
+		fmt.Println("3. Estimasi Biaya Impor/Ekspor")
+		fmt.Println("4. Tampilkan Semua Barang")
+		fmt.Println("5. Urutkan Pajak Impor (Selection Sort)")
+		fmt.Println("6. Urutkan Harga Barang (Insertion Sort)")
+		fmt.Println("7. Keluar")
+
+		pilihan := input("Pilih menu (1-7): ")
 
 		switch pilihan {
 		case "1":
-			fmt.Print("Nama barang: ")
-			nama, _ := reader.ReadString('\n')
-			cariNamaBarang(daftar, strings.TrimSpace(nama))
-		case "2":
-			fmt.Print("Surat izin (ID/Jenis): ")
-			surat, _ := reader.ReadString('\n')
-			cariSurat(daftar, strings.TrimSpace(surat))
-		case "3":
-			fmt.Print("Jenis transportasi: ")
-			tr, _ := reader.ReadString('\n')
-			filterTransportasi(daftar, strings.TrimSpace(tr))
-		case "4":
-			fmt.Print("Jenis barang: ")
-			jenis, _ := reader.ReadString('\n')
-			filterJenisBarang(daftar, strings.TrimSpace(jenis))
-		case "5":
-			fmt.Print("Nama barang: ")
-			nama, _ := reader.ReadString('\n')
-			nama = strings.TrimSpace(nama)
-			ditemukan := false
-			for _, barang := range daftar {
-				if strings.Contains(strings.ToLower(barang.Nama), strings.ToLower(nama)) {
-					fmt.Printf("Estimasi total biaya %s: Rp%.2f\n", barang.Nama, estimasiBiaya(barang))
-					ditemukan = true
-				}
-			}
-			if !ditemukan {
+			nama := input("Masukkan nama barang: ")
+			index := cariBarang(nama)
+			if index == -1 {
 				fmt.Println("Barang tidak ditemukan.")
-			}
-		case "6":
-			tampilkanSemua(daftar)
-		case "7":
-			fmt.Println("1. Pajak")
-			fmt.Println("2. Harga")
-			fmt.Print("Pilih: ")
-			sortOpsi, _ := reader.ReadString('\n')
-			sortOpsi = strings.TrimSpace(sortOpsi)
-			if sortOpsi == "1" {
-				heapSortPajak(daftar)
-			} else if sortOpsi == "2" {
-				radixSortHarga(daftar)
 			} else {
-				fmt.Println("Pilihan tidak valid.")
+				cetakBarang(daftarBarang[index])
 			}
-		case "8":
-			fmt.Println("Sedang loading keluar desuwa...")
+		case "2":
+			urutkanNama()
+			urutkanSuratIzinID()
+			var id int
+			fmt.Print("Masukkan ID Surat Izin yang dicari: ")
+			fmt.Scanln(&id)
+			index := cariSuratIzinDenganBinary(id)
+			if index == -1 {
+				fmt.Println("Barang dengan ID Surat Izin tersebut tidak ditemukan.")
+			} else {
+				cetakBarang(daftarBarang[index])
+			}
+		case "3":
+			estimasiBiaya()
+		case "4":
+			tampilkanSemuaBarang()
+		case "5":
+			urut := input("Urutkan pajak impor secara menaik? (y/n): ")
+			urutkanPajakImpor(strings.ToLower(urut) == "y")
+			fmt.Println("Data telah diurutkan berdasarkan Pajak Impor.")
+			tampilkanSemuaBarang()
+		case "6":
+			urut := input("Urutkan harga secara menaik? (y/n): ")
+			urutkanHarga(strings.ToLower(urut) == "y")
+			fmt.Println("Data telah diurutkan berdasarkan Harga.")
+			tampilkanSemuaBarang()
+		case "7":
+			fmt.Println("Terima kasih telah menggunakan sistem.")
 			return
 		default:
-			fmt.Println("Menu tidak dikenali.")
+			fmt.Println("Pilihan tidak valid, silakan coba lagi.")
 		}
 	}
 }
 
 func main() {
-	data := muatData("data.json")
-	menu(data)
+	menu()
 }
