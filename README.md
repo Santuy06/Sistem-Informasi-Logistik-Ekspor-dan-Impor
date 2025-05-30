@@ -1,50 +1,84 @@
 # Sistem-Informasi-Logistik-Ekspor-dan-Impor
 
 
-📦 Sistem Informasi Logistik Ekspor dan Impor
-Sistem Informasi Logistik Ekspor dan Impor adalah sebuah aplikasi berbasis Command Line Interface (CLI) yang dikembangkan menggunakan bahasa pemrograman Golang. Aplikasi ini dirancang untuk membantu pengelolaan logistik pada aktivitas ekspor dan impor di Indonesia, dengan fitur-fitur analisis dan pencarian berbasis data dari file JSON.
+Berikut versi perbaikan dan penyempurnaan deskripsi GitHub Anda agar lebih profesional, rapi, dan menarik:
 
-Sistem ini memungkinkan pengguna untuk mencari, memfilter, menyortir, dan menghitung estimasi biaya barang secara cepat dan efisien, mendukung pengambilan keputusan dalam rantai pasok logistik secara lebih tepat dan terstruktur.
+---
 
-🧩 Fitur Utama
-🔍 Pencarian Nama Barang
-Cari data barang berdasarkan nama.
+# 📦 Sistem Informasi Logistik Ekspor dan Impor
 
-📄 Pencarian Surat Perizinan
-Telusuri barang berdasarkan jenis surat izin.
+**Sistem Informasi Logistik Ekspor dan Impor** adalah aplikasi berbasis **Command Line Interface (CLI)** yang dikembangkan menggunakan **bahasa pemrograman Go (Golang)**. Aplikasi ini dirancang untuk mendukung pengelolaan data logistik pada aktivitas ekspor dan impor di Indonesia secara cepat, efisien, dan terstruktur.
 
-🚚 Penyortiran Transportasi Barang
-Filter barang berdasarkan jenis transportasi seperti laut, udara, atau darat.
+Dengan memanfaatkan file data berformat **JSON**, aplikasi ini menyediakan berbagai fitur pencarian, penyortiran, serta estimasi biaya logistik untuk mendukung pengambilan keputusan dalam rantai pasok.
 
-📦 Penyortiran Jenis Barang
-Tampilkan barang sesuai kategori jenisnya (misal: elektronik, tekstil, dsb.).
+---
 
-💰 Estimasi Biaya Logistik
-Hitung estimasi biaya berdasarkan harga barang, pajak, dan jarak tempuh dengan formula:
+## 🧩 Fitur Utama
 
-Total = Harga + (Harga × Pajak%) + (Jarak × Tarif/km)
+### 🔍 Pencarian Nama Barang
 
-📊 Tampilan Seluruh Data Barang
-Lihat seluruh data logistik dalam satu tampilan.
+Cari dan temukan informasi barang berdasarkan nama.
 
-🔢 Penyortiran Data
+### 📄 Pencarian Berdasarkan Surat Izin
 
-Heap Sort: berdasarkan persentase pajak.
+Filter data barang berdasarkan jenis **Surat Izin** seperti *Impor*, *Ekspor*, atau *Lokal*.
 
-Radix Sort (simulasi): berdasarkan harga barang.
+### 🚚 Penyortiran Transportasi
 
-📋 Menu Interaktif
-Navigasi berbasis angka memudahkan pengguna dalam memilih fitur.
+Tampilkan barang berdasarkan jenis transportasi: **Truk**, **Kereta**, **Pesawat**, atau **Kapal**.
 
-❌ Exit Program
-Keluar dari aplikasi dengan aman.
+### 📦 Penyortiran Jenis Barang
 
-⚙️ Teknologi
-Bahasa Pemrograman: Go (Golang)
+Kelompokkan barang sesuai kategori seperti: **Pertanian**, **Peternakan**, **Perikanan**, **Perkebunan**, dll.
 
-Input Data: File JSON (data.json)
+### 💰 Estimasi Biaya Logistik
 
-Eksekusi Program: Command Line Interface (CLI)
+Hitung estimasi total biaya logistik dengan rumus:
 
-📌 Tujuan
-Aplikasi ini ditujukan untuk membantu pengusaha, pengelola logistik, dan pihak terkait dalam melakukan pencatatan, analisis, dan estimasi biaya logistik ekspor-impor secara efisien. Sistem ini juga merupakan bagian dari Tugas Besar (TuBes) yang menggambarkan penerapan nyata pengembangan sistem informasi berbasis data dan proses logistik terotomasi.
+```
+Total Biaya = Harga + (Harga × Pajak%) + (Jarak × Tarif per KM)
+```
+
+### 📊 Tampilan Seluruh Data
+
+Lihat seluruh data barang secara lengkap dalam satu tampilan CLI.
+
+### 🔢 Penyortiran Data
+
+* **Heap Sort** → Menyortir berdasarkan persentase pajak (tinggi ke rendah).
+* **Radix Sort (Simulasi)** → Menyortir berdasarkan harga barang.
+
+### 📋 Menu Interaktif
+
+Navigasi mudah berbasis angka untuk mengakses berbagai fitur.
+
+### ❌ Exit Program
+
+Keluar dari aplikasi dengan aman dan tertib.
+
+---
+
+## ⚙️ Teknologi
+
+* **Bahasa Pemrograman**: Go (Golang)
+* **Input Data**: File JSON (`data.json`)
+* **Antarmuka**: Command Line Interface (CLI)
+
+---
+
+## 📌 Tujuan
+
+Aplikasi ini dikembangkan sebagai bagian dari **Tugas Besar (TuBes)** untuk menggambarkan penerapan nyata dari pengembangan **sistem informasi berbasis data** dalam konteks **logistik ekspor dan impor**.
+
+Diharapkan dapat membantu:
+
+* Pengusaha
+* Pengelola logistik
+* Pemerintah dan pemangku kepentingan lain
+
+Dalam melakukan **pencatatan, analisis, dan estimasi biaya** logistik secara lebih efisien dan terotomatisasi.
+
+---
+
+Bila Anda ingin saya bantu bikin README lengkap atau menyesuaikan dengan gaya Markdown GitHub secara penuh (misalnya dengan badge, link repo, atau contoh input/output), tinggal beri tahu!
+
