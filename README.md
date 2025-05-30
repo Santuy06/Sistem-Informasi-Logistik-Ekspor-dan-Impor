@@ -1,78 +1,46 @@
 # Sistem-Informasi-Logistik-Ekspor-dan-Impor
 
----
+# Estimasi Biaya Pengiriman Barang
 
-# 📦 Sistem Informasi Logistik Ekspor dan Impor
+Program ini ditulis menggunakan bahasa Go (Golang) untuk menghitung estimasi biaya pengiriman suatu barang berdasarkan nama barang, jenis surat izin (Impor, Ekspor, atau Lokal), serta jenis transportasi.
 
-**Sistem Informasi Logistik Ekspor dan Impor** adalah aplikasi berbasis **Command Line Interface (CLI)** yang dikembangkan menggunakan **bahasa pemrograman Go (Golang)**. Aplikasi ini dirancang untuk mendukung pengelolaan data logistik pada aktivitas ekspor dan impor di Indonesia secara cepat, efisien, dan terstruktur.
+## Fitur
 
-Dengan memanfaatkan file data berformat **JSON**, aplikasi ini menyediakan berbagai fitur pencarian, penyortiran, serta estimasi biaya logistik untuk mendukung pengambilan keputusan dalam rantai pasok.
+- Menyimpan daftar barang dengan informasi:
+  - Nama dan jenis barang
+  - Harga barang dan berat
+  - Jenis surat izin (Impor, Ekspor, Lokal)
+  - Pajak impor dan ekspor
+  - Data transportasi (jenis, biaya per KM, waktu pengiriman)
+- Memungkinkan pengguna memilih barang berdasarkan nama
+- Menghitung total biaya transportasi
+- Menghitung pajak berdasarkan jenis izin
+- Menampilkan hasil estimasi biaya secara jelas
 
----
+## Struktur Data
 
-## 🧩 Fitur Utama
+Program ini menggunakan beberapa `struct`, seperti:
 
-### 🔍 Pencarian Nama Barang
+```go
+type Barang struct {
+    Nama         string
+    Jenis        string
+    Harga        float64
+    PajakImpor   float64
+    PajakEkspor  float64
+    BeratBarang  float64
+    SuratIzin    SuratIzin
+    Transportasi Transportasi
+}
 
-Cari dan temukan informasi barang berdasarkan nama.
+type SuratIzin struct {
+    ID    int
+    Jenis string // Impor, Ekspor, atau Lokal
+}
 
-### 📄 Pencarian Berdasarkan Surat Izin
-
-Filter data barang berdasarkan jenis **Surat Izin** seperti *Impor*, *Ekspor*, atau *Lokal*.
-
-### 🚚 Penyortiran Transportasi
-
-Tampilkan barang berdasarkan jenis transportasi: **Truk**, **Kereta**, **Pesawat**, atau **Kapal**.
-
-### 📦 Penyortiran Jenis Barang
-
-Kelompokkan barang sesuai kategori seperti: **Pertanian**, **Peternakan**, **Perikanan**, **Perkebunan**, dll.
-
-### 💰 Estimasi Biaya Logistik
-
-Hitung estimasi total biaya logistik dengan rumus:
-
-```
-Total Biaya = Harga + (Harga × Pajak%) + (Jarak × Tarif per KM)
-```
-
-### 📊 Tampilan Seluruh Data
-
-Lihat seluruh data barang secara lengkap dalam satu tampilan CLI.
-
-### 🔢 Penyortiran Data
-
-* **Heap Sort** → Menyortir berdasarkan persentase pajak (tinggi ke rendah).
-* **Radix Sort (Simulasi)** → Menyortir berdasarkan harga barang.
-
-### 📋 Menu Interaktif
-
-Navigasi mudah berbasis angka untuk mengakses berbagai fitur.
-
-### ❌ Exit Program
-
-Keluar dari aplikasi dengan aman dan tertib.
-
----
-
-## ⚙️ Teknologi
-
-* **Bahasa Pemrograman**: Go (Golang)
-* **Input Data**: File JSON (`data.json`)
-* **Antarmuka**: Command Line Interface (CLI)
-
----
-
-## 📌 Tujuan
-
-Aplikasi ini dikembangkan sebagai bagian dari **Tugas Besar (TuBes)** untuk menggambarkan penerapan nyata dari pengembangan **sistem informasi berbasis data** dalam konteks **logistik ekspor dan impor**.
-
-Diharapkan dapat membantu:
-
-* Pengusaha
-* Pengelola logistik
-* Pemerintah dan pemangku kepentingan lain
-
-Dalam melakukan **pencatatan, analisis, dan estimasi biaya** logistik secara lebih efisien dan terotomatisasi.
-
----
+type Transportasi struct {
+    ID              string
+    Jenis           string // Truk, Kereta, Kapal, Pesawat
+    BiayaPerKM      float64
+    WaktuPengiriman int // dalam hari
+}
