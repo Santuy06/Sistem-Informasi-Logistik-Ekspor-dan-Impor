@@ -7,15 +7,15 @@ Program ini ditulis menggunakan bahasa Go (Golang) untuk menghitung estimasi bia
 ## Fitur
 
 - Menyimpan daftar barang dengan informasi:
-  - Nama dan jenis barang
-  - Harga barang dan berat
-  - Jenis surat izin (Impor, Ekspor, Lokal)
-  - Pajak impor dan ekspor
-  - Data transportasi (jenis, biaya per KM, waktu pengiriman)
-- Memungkinkan pengguna memilih barang berdasarkan nama
-- Menghitung total biaya transportasi
-- Menghitung pajak berdasarkan jenis izin
-- Menampilkan hasil estimasi biaya secara jelas
+  - Nama dan jenis barang.
+  - Harga barang dan berat.
+  - Jenis surat izin (Impor, Ekspor, Lokal).
+  - Pajak impor dan ekspor.
+  - Data transportasi (jenis, biaya per KM, waktu pengiriman).
+- Memungkinkan pengguna memilih barang berdasarkan nama.
+- Menghitung total biaya transportasi.
+- Menghitung pajak berdasarkan jenis izin.
+- Menampilkan hasil estimasi biaya secara jelas.
 
 ## Struktur Data
 
