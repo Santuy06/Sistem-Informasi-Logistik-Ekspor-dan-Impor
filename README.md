@@ -1,46 +1,64 @@
-# Sistem-Informasi-Logistik-Ekspor-dan-Impor
+# Sistem Ekspor Impor 🚢
 
-# Estimasi Biaya Pengiriman Barang
+Sistem manajemen ekspor dan impor barang yang dibangun dengan arsitektur modern (Frontend-Backend terpisah) dan dirancang untuk menangani beban data besar (500.000+ records).
 
-Program ini ditulis menggunakan bahasa Go (Golang) untuk menghitung estimasi biaya pengiriman suatu barang berdasarkan nama barang, jenis surat izin (Impor, Ekspor, atau Lokal), serta jenis transportasi.
+## 🚀 Teknologi yang Digunakan
 
-## Fitur
+- **Frontend**: React.js (Vite), Ant Design (UI), Axios, Recharts (Visualisasi).
+- **Backend**: Go (Gin Gonic), MySQL (Driver), GORM-like Raw SQL, JWT Auth, Bcrypt.
+- **Testing**: JMeter (Performance/Stress Test), Locust (Python-based Load Testing).
 
-- Menyimpan daftar barang dengan informasi:
-  - Nama dan jenis barang.
-  - Harga barang dan berat.
-  - Jenis surat izin (Impor, Ekspor, Lokal).
-  - Pajak impor dan ekspor.
-  - Data transportasi (jenis, biaya per KM, waktu pengiriman).
-- Memungkinkan pengguna memilih barang berdasarkan nama.
-- Menghitung total biaya transportasi.
-- Menghitung pajak berdasarkan jenis izin.
-- Menampilkan hasil estimasi biaya secara jelas.
+## ✨ Fitur Utama
 
-## Struktur Data
+- **Manajemen Barang**: CRUD (Create, Read, Update, Delete) data barang dengan efisiensi tinggi.
+- **Master Data**: Kelola data Petugas (dengan struktur hirarki/tree), Transportasi, dan Surat Izin.
+- **Kalkulator Estimasi**: Penghitungan pajak dan biaya pengiriman berdasarkan jenis barang dan rute.
+- **Autentikasi Keamanan**: Login aman dengan JWT (JSON Web Token) dan hashing password Bcrypt.
+- **Keamanan API**: Implementasi rate limiting dan security headers (XSS Protection, CSP, dll).
+- **Skalabilitas**: Database seed script untuk menghasilkan 500.000 data test secara otomatis.
 
-Program ini menggunakan beberapa `struct`, seperti:
+## 🛠️ Persiapan & Instalasi
 
-```go
-type Barang struct {
-    Nama         string
-    Jenis        string
-    Harga        float64
-    PajakImpor   float64
-    PajakEkspor  float64
-    BeratBarang  float64
-    SuratIzin    SuratIzin
-    Transportasi Transportasi
-}
+### 1. Database Setup
+1. Pastikan MySQL sudah berjalan.
+2. Impor skema dan jalankan seeding dari file `backend/database_setup.sql`:
+   ```sql
+   SOURCE backend/database_setup.sql;
+   ```
+   *Script ini akan otomatis menginisialisasi database `ekspor_impor` dan mengisi 500.000 data.*
 
-type SuratIzin struct {
-    ID    int
-    Jenis string // Impor, Ekspor, atau Lokal
-}
+### 2. Backend (Go)
+1. Masuk ke folder `backend`.
+2. Salin `.env.example` ke `.env` dan sesuaikan konfigurasi database.
+3. Jalankan server:
+   ```bash
+   go run main.go
+   ```
+   *Backend akan berjalan di `http://localhost:8080`.*
 
-type Transportasi struct {
-    ID              string
-    Jenis           string // Truk, Kereta, Kapal, Pesawat
-    BiayaPerKM      float64
-    WaktuPengiriman int // dalam hari
-}
+### 3. Frontend (React)
+1. Jalankan instalasi dependensi (di root folder):
+   ```bash
+   npm install
+   ```
+2. Jalankan development server:
+   ```bash
+   npm run dev
+   ```
+   *Frontend akan berjalan di `http://localhost:5173`.*
+
+## 📈 Pengujian Performa (Performance Testing)
+
+Proyek ini menyertakan file pengujian untuk memastikan sistem tetap stabil pada beban tinggi:
+- **JMeter**: Gunakan `dashboard_test.jmx` atau `sql_perf_test.jmx`.
+- **Locust**: Jalankan `locustfile.py` untuk mensimulasikan trafik pengguna secara konkuren.
+
+## 📁 Struktur Folder
+
+- `/src` - Source code Frontend React.
+- `/backend` - Source code Backend Go & SQL Scripts.
+- `/database` - File penunjang database tambahan.
+- `*.jmx` & `locustfile.py` - Script pengujian performa.
+
+---
+*Dibuat untuk keperluan sistem manajemen logistik yang tangguh dan terukur.*
